@@ -6,10 +6,12 @@ f = open('config.json')
 data = json.load(f)
 token = data["token"]
 
-header = {"Authorization": "Bearer "+token }
+header = {"Authorization": "Bearer "+token, "enrollment_state": "active" }
 
 r = requests.get(url, headers=header)
 
-r.json()
+r = r.json()   
+#r = json.dumps(r, indent=4)
 
-print(r)
+for item in r:
+    print(item.get("name"))
